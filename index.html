@@ -158,7 +158,7 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<form method="post" action="#">
+							<form method="post" action="#" name="feedback-fk-unmul">
 								<div class="fields">
 									<div class="field">
 										<label for="name">Name</label>
@@ -219,6 +219,17 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+			  const scriptURL = 'https://script.google.com/macros/s/AKfycbx5F7Pgj143qjFIxNDPPyp38k_vWSrZQVSHY5Kc7nwCbIKNYeC8Y39WU2ll5O8jLCi3/exec'
+			  const form = document.forms['feedback-fk-unmul']
+
+			  form.addEventListener('submit', e => {
+			    e.preventDefault()
+			    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+			      .then(response => console.log('Success!', response))
+			      .catch(error => console.error('Error!', error.message))
+			  })
+			</script>
 
 	</body>
 </html>
