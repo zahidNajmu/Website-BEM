@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="shortcut icon" href="./images/favicon/RESWARA (1).png" type="image/x-icon">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -158,6 +159,10 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
+							<div class="alert alert-success alert-dismissible fade show my-alert d-none" role="alert">
+							<strong>Successed</strong> Pesan kamu sudah terkirim.
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
 							<form method="post" action="#" name="feedback-fk-unmul">
 								<div class="fields">
 									<div class="field">
@@ -174,7 +179,14 @@
 									</div>
 								</div>
 								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
+									<li>
+										<button class="btn btn-dark btn-submit" type="submit">SEND MASSAGE</button>
+
+										<button class="btn btn-dark btn-loading d-none" type="submit" disabled>
+											<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+											Loading...
+										</button>
+									</li>
 								</ul>
 							</form>
 						</section>
@@ -219,14 +231,32 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 			<script>
 			  const scriptURL = 'https://script.google.com/macros/s/AKfycbx5F7Pgj143qjFIxNDPPyp38k_vWSrZQVSHY5Kc7nwCbIKNYeC8Y39WU2ll5O8jLCi3/exec'
 			  const form = document.forms['feedback-fk-unmul']
+			  const btnSubmit = document.querySelector('.btn-submit');
+			  const btnLoading = document.querySelector('.btn-loading');
+			  const myAlert = document.querySelector('.my-alert');
 
 			  form.addEventListener('submit', e => {
-			    e.preventDefault()
+			    e.preventDefault();
+				// ketika tombol submit di klik
+				// tampilkan tombol loading, hilangkan tombol submit
+				btnLoading.classList.toggle('d-none');
+				btnSubmit.classList.toggle('d-none');
+
 			    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-			      .then(response => console.log('Success!', response))
+			      .then(response => {
+					  // tampilkan tombol submit, hilangkan tombol loading
+						btnLoading.classList.toggle('d-none');
+						btnSubmit.classList.toggle('d-none');
+						// tampilkan alert
+						myAlert.classList.toggle('d-none');
+						// kosongin form
+						form.reset();
+						console.log('Success!', response)
+					})
 			      .catch(error => console.error('Error!', error.message))
 			  })
 			</script>

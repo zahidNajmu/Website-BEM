@@ -4012,6 +4012,12 @@ input, select, textarea {
 			color: #717981 !important;
 		}
 
+		#footer li button {
+			font-family: "Source Sans Pro", Helvetica, sans-serif;
+			border: none;
+			border-radius: 0;
+		}
+
 			#footer input[type="submit"]:hover,
 			#footer input[type="reset"]:hover,
 			#footer input[type="button"]:hover,
